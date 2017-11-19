@@ -76,13 +76,13 @@ class ListaPostagens extends Component {
                 <span
                 onClick={() => onDeletePostagem(postagem)}
                   className="postagem-left-editar"
-                  title="Editar postagem"
+                  title="Editar postagem!"
                 />
                 <br />
                 <span
                 onClick={() => onDeletePostagem(postagem)}
                   className="postagem-left-excluir"
-                  title="Excluir a postagem"
+                  title="Excluir a postagem!"
                 />
               </div>
             </li>
