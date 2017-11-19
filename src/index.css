@@ -212,7 +212,7 @@ body, .app {
 .postagem-left-editar {
   width: 100%;
   padding: 10px 10px 10px 50px;
-  background-image: url('./icons/cancel.svg');
+  background-image: url('./icons/editar.png');
   background-repeat: no-repeat;
   background-position: 20px center;
   background-size: 1.2em;
@@ -225,7 +225,7 @@ body, .app {
 .postagem-left-excluir {
   width: 100%;
   padding: 10px 10px 10px 50px;
-  background-image: url('./icons/cancel.svg');
+  background-image: url('./icons/excluir.png');
   background-repeat: no-repeat;
   background-position: 20px center;
   background-size: 1.2em;
