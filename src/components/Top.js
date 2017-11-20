@@ -1,8 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { AppBar, MenuItem, SelectField } from "material-ui";
-import { Toolbar, ToolbarGroup, ToolbarTitle } from "material-ui/Toolbar";
+import { AppBar } from "material-ui";
+import { Toolbar } from "material-ui/Toolbar";
 import { Categories } from "./Categories";
+import Sort from "../components/Sort";
 
 export const Top = ({
   history,
@@ -20,21 +21,10 @@ export const Top = ({
       showMenuIconButton={false}
       style={{ backgroundColor: "#aaa" }}
     />
+
     {useToobar && (
       <Toolbar>
-        <ToolbarGroup>
-          <ToolbarTitle text="Sort:" />
-          <SelectField
-            value={sortSelected}
-            onChange={(event, index, sortSelected) =>
-              handleChangeSort(sortSelected)}
-          >
-            <MenuItem value={"-voteScore"} primaryText="Vote Score" />
-            <MenuItem value={"-timestamp"} primaryText="Date" />
-          </SelectField>
-        </ToolbarGroup>
-        <ToolbarGroup>
-          <ToolbarTitle text="Categories:" />
+        <Sort sortSelected={sortSelected} handleChangeSort={handleChangeSort} />
           <Categories
             history={history}
             categories={categories}
@@ -42,7 +32,7 @@ export const Top = ({
             handleChange={handleChangeCategory}
             showFirstElement={true}
           />
-        </ToolbarGroup>
+
       </Toolbar>
     )}
   </div>

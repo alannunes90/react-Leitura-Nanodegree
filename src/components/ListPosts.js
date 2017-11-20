@@ -6,7 +6,8 @@ export const ListPosts = ({
   posts,
   history,
   postEditAction,
-  postRemoveAction
+  postRemoveAction,
+  postVoteAction
 }) => {
   return (
     <div className="list-postagens">
@@ -18,6 +19,7 @@ export const ListPosts = ({
             history={history}
             postEditAction={postEditAction}
             postRemoveAction={postRemoveAction}
+            postVoteAction={postVoteAction}
           />
         ))}
       </ol>

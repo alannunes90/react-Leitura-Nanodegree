@@ -28,9 +28,7 @@ import ActionDelete from "material-ui/svg-icons/action/delete";
 import EditorModeEdit from "material-ui/svg-icons/editor/mode-edit";
 import HardwareKeyboardArrowLeft from "material-ui/svg-icons/hardware/keyboard-arrow-left";
 import { blue500 } from "material-ui/styles/colors";
-import { Commentary } from "../../components";
-import Votacao from "../../components/Votacao";
-
+import { Commentary, Votacao } from "../../components";
 import PostFormView from "../post/PostFormView";
 import CommentFromView from "../comment/CommentFormView";
 
@@ -40,7 +38,7 @@ class PostDetailFormView extends Component {
     let postId = this.props.match.params.postId;
     this.props.getPostDetailAction(postId, this.props.history);
     this.props.getAllCommentsByPostIdAction(postId);
-    // Validando
+
     if (PostEntity.error !== undefined) {
       alert("Sorry this post was not found.");
       history.push("/");
@@ -48,7 +46,18 @@ class PostDetailFormView extends Component {
   }
 
   render() {
-    let { PostEntity, comments } = this.props;
+    let {
+      PostEntity,
+      comments,
+      postEditAction,
+      postRemoveAction,
+      postVoteAction,
+      history,
+      postDetailOpenDialogCommentAction,
+      postDetailCommentVoteAction,
+      postDetailCommentEditAction,
+      postDetailCommentRemoveAction
+    } = this.props;
     let { title, body, author, voteScore, timestamp } = PostEntity;
     return (
       <div>
@@ -72,62 +81,61 @@ class PostDetailFormView extends Component {
             <IconButton
               touch={true}
               tooltip="Edit Post"
-              onClick={() => this.props.postEditAction(PostEntity)}
+              onClick={() => postEditAction(PostEntity)}
             >
               <EditorModeEdit />
             </IconButton>
             <IconButton
               touch={true}
               tooltip="Delete Post"
-              onClick={() =>
-                this.props.postRemoveAction(PostEntity.id, this.props.history)}
+              onClick={() => postRemoveAction(PostEntity.id, history)}
             >
               <ActionDelete />
             </IconButton>
           </ToolbarGroup>
         </Toolbar>
         <div className="post-details-container">
-        <div className="post-details">
-          <h1>{title}</h1>
-          <hr />
-          <div className="content-body">
-            <div className="content-body-left">
-              <Votacao post={PostEntity} />
+          <div className="post-details">
+            <h1>{title}</h1>
+            <hr />
+            <div className="content-body">
+              <div className="content-body-left">
+                <Votacao post={PostEntity} postVoteAction={postVoteAction} />
+              </div>
+              <div className="content-body-right">
+                <p>{body}</p>
+                <small>
+                  By: {author}, Date:{" "}
+                  {moment(timestamp).format("DD/MM/YY HH:mm")}
+                </small>
+              </div>
             </div>
-            <div className="content-body-right">
-              <p>{body}</p>
-              <small>
-                By: {author}, Date: {moment(timestamp).format("DD/MM/YY HH:mm")}
-              </small>
+            <hr />
+            <div id="comments">
+              <h2>
+                {comments.length} Answers
+                <IconButton
+                  touch={true}
+                  tooltip="Add new comment"
+                  onClick={() => postDetailOpenDialogCommentAction(true)}
+                >
+                  <ActionNoteAdd color={blue500} />
+                </IconButton>
+              </h2>
+              {comments.map(c => (
+                <Commentary
+                  key={c.id}
+                  CommentEntity={c}
+                  handleVoteComment={postDetailCommentVoteAction}
+                  handleEditComment={postDetailCommentEditAction}
+                  handleRemoveComment={postDetailCommentRemoveAction}
+                />
+              ))}
             </div>
+            <PostFormView fab={false} />
+            <CommentFromView />
           </div>
-          <hr />
-          <div id="comments">
-            <h2>
-              {comments.length} Answers
-              <IconButton
-                touch={true}
-                tooltip="Add new comment"
-                onClick={() =>
-                  this.props.postDetailOpenDialogCommentAction(true)}
-              >
-                <ActionNoteAdd color={blue500} />
-              </IconButton>
-            </h2>
-            {comments.map(c => (
-              <Commentary
-                key={c.id}
-                CommentEntity={c}
-                handleVoteComment={this.props.postDetailCommentVoteAction}
-                handleEditComment={this.props.postDetailCommentEditAction}
-                handleRemoveComment={this.props.postDetailCommentRemoveAction}
-              />
-            ))}
-          </div>
-          <PostFormView fab={false} />
-          <CommentFromView />
         </div>
-      </div>
       </div>
     );
   }

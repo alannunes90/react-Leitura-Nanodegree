@@ -131,6 +131,7 @@ body,
 .postagem-list-item {
   padding: 20px;
   background: white;
+  color: #aaa;
   display: flex;
 }
 
@@ -182,35 +183,17 @@ body,
 }
 
 .postagem-left {
-  padding-right: 15px;
   align-self: center;
   text-align: center;
 }
 
-.postagem-left-editar {
-  width: 100%;
+.postagem-left-icon {
   padding: 10px 10px 10px 50px;
-  background-image: url("./icons/editar.png");
-  background-repeat: no-repeat;
   background-position: 20px center;
   background-size: 1.2em;
   font-size: 1.2em;
   border: 0;
   outline: none;
-  cursor: pointer;
-}
-
-.postagem-left-excluir {
-  width: 100%;
-  padding: 10px 10px 10px 50px;
-  background-image: url("./icons/excluir.png");
-  background-repeat: no-repeat;
-  background-position: 20px center;
-  background-size: 1.2em;
-  font-size: 1.2em;
-  border: 0;
-  outline: none;
-  cursor: pointer;
 }
 
 .content-body {
@@ -232,6 +215,13 @@ body,
 .content-body-right {
   float: left;
   width: 90%;
+}
+
+.list-post-styles-icon {
+  width: 12px;
+  height: 12px;
+  color: #aaa;
+  margin-right: 4px;
 }
 
 /* Vote */

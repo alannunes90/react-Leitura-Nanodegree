@@ -47,6 +47,7 @@ class App extends Component {
           history={history}
           postEditAction={this.props.postEditAction}
           postRemoveAction={this.props.postRemoveAction}
+          postVoteAction={this.props.postVoteAction}
         />
         <div className="add-postagem">
           <PostFormView />
