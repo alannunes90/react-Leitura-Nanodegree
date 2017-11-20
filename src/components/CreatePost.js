@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import serializeForm from "form-serialize";
 
-class CriarPostagem extends Component {
+class CreatePost extends Component {
   handleSubmit = e => {
     e.preventDefault();
     const values = serializeForm(e.target, { hash: true });
@@ -29,4 +29,4 @@ class CriarPostagem extends Component {
   }
 }
 
-export default CriarPostagem;
+export default CreatePost;

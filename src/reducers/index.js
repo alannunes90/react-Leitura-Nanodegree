@@ -1,9 +1,10 @@
-import { combineReducers } from 'redux';
-// import RootReducer from './RootReducer';
-// import PostReducer from './PostReducer';
-// import PostDetailReducer from './PostDetailReducer';
-
+import { combineReducers } from "redux";
+import RootReducer from "./RootReducer";
+import PostReducer from "./PostReducer";
+import PostDetailReducer from "./PostDetailReducer";
 
 export default combineReducers({
-    //RootReducer, PostReducer, PostDetailReducer
-})
+  RootReducer,
+  PostReducer,
+  PostDetailReducer
+});

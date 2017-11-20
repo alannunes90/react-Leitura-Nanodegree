@@ -1,9 +1,23 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router";
+import { connect } from "react-redux";
+import sortBy from "sort-by";
 import { Route } from "react-router-dom";
-import ListaPostagens from "./postagem/ListaPostagens";
-// import CreateContact from './CreateContact';
-import CriarPostagem from "./postagem/CriarPostagem";
-//import * as ContactsAPI from './utils/ContactsAPI'
+import { ListPosts, CreatePost, Top } from "./components";
+import {
+  rootChangeCategoryAction,
+  rootChangeSortAction,
+  rootListCategoriesAction,
+  rootListPostsAction,
+  rootOpenDialogAction
+} from "./actions/RootActions";
+import {
+  postEditAction,
+  postRemoveAction,
+  postVoteAction
+} from "./actions/PostActions";
+import FloatingActionButton from "material-ui/FloatingActionButton";
+import ContentAdd from "material-ui/svg-icons/content/add";
 
 class App extends Component {
   state = {
@@ -11,46 +25,43 @@ class App extends Component {
   };
 
   componentDidMount() {
-    // título, autor, número de comentários, pontuação atual
-    const _posts = [
-      { id: 1, timestamp: '', titulo: "MVC", corpo: 'O que é mvc?', autor: "Alan Nunes Cerqueira", categoria: 'web', numVotos: 3, deletado: false },
-      { id: 2, timestamp: '', titulo: "PWA", corpo: 'O que é pwa?', autor: "Alan Nunes Cerqueira", categoria: 'web', numVotos: 10, deletado: false, },
-      { id: 3, timestamp: '', titulo: ".NET", corpo: 'O que é .NET?', autor: "Alan Nunes Cerqueira", categoria: 'web', numVotos: 1, deletado: true, }
-    ];
-
-    this.setState({ postagens: _posts });
+    this.props.rootListCategoriesAction();
+    this.props.rootChangeCategoryAction("all");
   }
-
-  excluirPostagem = postagem => {
-    this.setState(state => ({
-      postagens: state.postagens.filter(c => c.id !== postagem.id)
-    })); // remove o contato do state (local)
-
-    //ContactsAPI.remove(contact) // Chama a API para remover o contato do Server
-  };
-
-  incluirPostagem(postagem) {
-    this.setState(state => ({
-      postagens: state.postagens.concat([postagem])
-    }));
-    // ContactsAPI.create(contact).then(contact => {
-    //   this.setState(state => ({
-    //     contacts: state.contacts.concat([ contact ])
-    //   }))
-    // })
-  }
-
   render() {
+    let {
+      history,
+      posts,
+      categories,
+      categorySelected,
+      sortSelected
+    } = this.props;
+
     return (
       <div>
+        <FloatingActionButton className="add-postagem">
+          <ContentAdd onClick={() => history.push("/create")} />
+        </FloatingActionButton>
         <Route
           exact
           path="/"
           render={() => (
             <div>
-              <ListaPostagens
-                onDeletePostagem={this.excluirPostagem}
-                postagens={this.state.postagens.filter(_ => _.deletado === false)}
+              <Top
+                title="Project of Reading"
+                history={history}
+                categories={categories}
+                categorySelected={categorySelected}
+                sortSelected={sortSelected}
+                handleChangeCategory={this.props.rootChangeCategoryAction}
+                handleChangeSort={this.props.rootChangeSortAction}
+              />
+              <ListPosts
+                posts={posts}
+                history={history}
+                handleVotePost={this.props.postVoteAction}
+                handleEditPost={this.props.postEditAction}
+                handleDeletePost={this.props.postRemoveAction}
               />
             </div>
           )}
@@ -58,7 +69,7 @@ class App extends Component {
         <Route
           path="/create"
           render={({ history }) => (
-            <CriarPostagem
+            <CreatePost
               onCreateContact={postagem => {
                 this.incluirPostagem(postagem);
                 history.push("/");
@@ -71,4 +82,30 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  categorySelected: state.RootReducer.categorySelected,
+  sortSelected: state.RootReducer.sortSelected,
+  categories: state.RootReducer.categories,
+  posts:
+    state.RootReducer.categorySelected !== "all"
+      ? state.RootReducer.posts.filter(
+          p => !p.deleted && p.category === state.RootReducer.categorySelected
+        )
+      : state.RootReducer.posts
+          .filter(p => !p.deleted)
+          .sort(sortBy(state.RootReducer.sortSelected)),
+  openDialogState: state.RootReducer.openDialogState
+});
+
+export default withRouter(
+  connect(mapStateToProps, {
+    rootChangeCategoryAction,
+    rootChangeSortAction,
+    rootListCategoriesAction,
+    rootListPostsAction,
+    rootOpenDialogAction,
+    postVoteAction,
+    postEditAction,
+    postRemoveAction
+  })(App)
+);

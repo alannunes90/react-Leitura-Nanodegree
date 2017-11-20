@@ -35,6 +35,7 @@ export const rootListCategoriesAction = () => {
 export const rootListPostsAction = categoryId => {
   return dispatch => {
     Api.getAllPosts().then(posts => {
+      // eslint-disable-next-line
       posts.map(post => {
         Api.getAllCommentsByPostId(post.id).then(comments => {
           post.totalComments = comments.length;

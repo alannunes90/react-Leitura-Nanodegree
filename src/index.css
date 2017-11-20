@@ -77,7 +77,7 @@ body, .app {
 /* ListPostagens */
 
 .list-postagens {
-  padding-top: 60px;
+  padding-top: 10px;
 }
 
 .list-postagens-top {
@@ -101,14 +101,13 @@ body, .app {
 }
 
 .add-postagem {
-  display: block;
-  width: 73px;
-  background: white;
-  background-image: url('./icons/person-add.svg');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 28px;
-  font-size: 0;
+  position: fixed;
+  right: 25px;
+  bottom: 25px;
+}
+
+.post-item {
+  cursor: pointer;
 }
 
 .showing-postagens {
