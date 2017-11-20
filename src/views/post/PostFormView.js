@@ -8,7 +8,6 @@ import {
   FloatingActionButton
 } from "material-ui";
 import ContentAdd from "material-ui/svg-icons/content/add";
-//import * as Styles from "../../styles";
 import { Categories } from "../../components";
 import { rootOpenDialogAction } from "../../actions/RootActions";
 import {
