@@ -39,7 +39,6 @@ class PostFormView extends Component {
       <div>
         {fab && (
           <FloatingActionButton
-            // style={Styles.FormPostStyle.FabStyle}
             onClick={() => this.props.rootOpenDialogAction(true)}
           >
             <ContentAdd />

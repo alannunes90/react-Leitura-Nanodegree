@@ -15,19 +15,13 @@ export const Top = ({
   handleChangeSort
 }) => (
   <div>
-    <AppBar title={title} />
+    <AppBar
+      title={title}
+      showMenuIconButton={false}
+      style={{ backgroundColor: "#aaa" }}
+    />
     {useToobar && (
       <Toolbar>
-        <ToolbarGroup>
-          <ToolbarTitle text="Categories:" />
-          <Categories
-            history={history}
-            categories={categories}
-            categorySelected={categorySelected}
-            handleChange={handleChangeCategory}
-            showFirstElement={true}
-          />
-        </ToolbarGroup>
         <ToolbarGroup>
           <ToolbarTitle text="Sort:" />
           <SelectField
@@ -38,6 +32,16 @@ export const Top = ({
             <MenuItem value={"-voteScore"} primaryText="Vote Score" />
             <MenuItem value={"-timestamp"} primaryText="Date" />
           </SelectField>
+        </ToolbarGroup>
+        <ToolbarGroup>
+          <ToolbarTitle text="Categories:" />
+          <Categories
+            history={history}
+            categories={categories}
+            categorySelected={categorySelected}
+            handleChange={handleChangeCategory}
+            showFirstElement={true}
+          />
         </ToolbarGroup>
       </Toolbar>
     )}

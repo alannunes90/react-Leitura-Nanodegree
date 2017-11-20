@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+//import { Votacao } from "../components";
 import Votacao from "./Votacao";
 
 class Post extends Component {

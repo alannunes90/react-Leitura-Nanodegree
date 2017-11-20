@@ -3,7 +3,7 @@ import { withRouter } from "react-router";
 import { connect } from "react-redux";
 import sortBy from "sort-by";
 import { Route } from "react-router-dom";
-import { ListPosts, CreatePost, Top } from "./components";
+import { ListPosts, Top } from "./components";
 import {
   rootChangeCategoryAction,
   rootChangeSortAction,
@@ -16,8 +16,7 @@ import {
   postRemoveAction,
   postVoteAction
 } from "./actions/PostActions";
-import FloatingActionButton from "material-ui/FloatingActionButton";
-import ContentAdd from "material-ui/svg-icons/content/add";
+import PostFormView from "./views/post/PostFormView";
 
 class App extends Component {
   componentDidMount() {
@@ -35,9 +34,6 @@ class App extends Component {
 
     return (
       <div>
-        <FloatingActionButton className="add-postagem">
-          <ContentAdd onClick={() => history.push("/create")} />
-        </FloatingActionButton>
         <Route
           exact
           path="/"
@@ -58,18 +54,10 @@ class App extends Component {
                 postEditAction={this.props.postEditAction}
                 postRemoveAction={this.props.postRemoveAction}
               />
+              <div className="add-postagem">
+                <PostFormView />
+              </div>
             </div>
-          )}
-        />
-        <Route
-          path="/create"
-          render={({ history }) => (
-            <CreatePost
-              onCreateContact={postagem => {
-                this.incluirPostagem(postagem);
-                history.push("/");
-              }}
-            />
           )}
         />
       </div>

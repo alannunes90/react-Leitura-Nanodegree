@@ -24,13 +24,13 @@ import {
 } from "material-ui";
 import { Link } from "react-router-dom";
 import ActionNoteAdd from "material-ui/svg-icons/action/note-add";
-import ActionThumbUp from "material-ui/svg-icons/action/thumb-up";
-import ActionThumbDown from "material-ui/svg-icons/action/thumb-down";
 import ActionDelete from "material-ui/svg-icons/action/delete";
 import EditorModeEdit from "material-ui/svg-icons/editor/mode-edit";
 import HardwareKeyboardArrowLeft from "material-ui/svg-icons/hardware/keyboard-arrow-left";
-import { red500, blue500, green500 } from "material-ui/styles/colors";
+import { blue500 } from "material-ui/styles/colors";
 import { Commentary } from "../../components";
+import Votacao from "../../components/Votacao";
+
 import PostFormView from "../post/PostFormView";
 import CommentFromView from "../comment/CommentFormView";
 
@@ -61,6 +61,7 @@ class PostDetailFormView extends Component {
               </IconButton>
             </Link>
           }
+          style={{ backgroundColor: "#aaa" }}
         />
         <Toolbar>
           <ToolbarGroup firstChild={false}>
@@ -85,49 +86,46 @@ class PostDetailFormView extends Component {
             </IconButton>
           </ToolbarGroup>
         </Toolbar>
-        <h1>{title}</h1>
-        <div id="content">{body}</div>
-        <small>
-          By: {author}, Date: {moment(timestamp).format("DD/MM/YY HH:mm")}
-        </small>
-        <br />
-        <IconButton
-          touch={true}
-          tooltip="This question shows research effort; it is useful and clear"
-          onClick={() => this.props.postVoteAction(PostEntity.id, "upVote")}
-        >
-          <ActionThumbUp color={green500} />
-        </IconButton>
-        <IconButton
-          touch={true}
-          tooltip="This question does not show any research effort; it is unclear or not useful"
-          onClick={() => this.props.postVoteAction(PostEntity.id, "downVote")}
-        >
-          <ActionThumbDown color={red500} />
-        </IconButton>
-        <div id="comments">
-          <h2>
-            Comments
-            <IconButton
-              touch={true}
-              tooltip="Add new comment"
-              onClick={() => this.props.postDetailOpenDialogCommentAction(true)}
-            >
-              <ActionNoteAdd color={blue500} />
-            </IconButton>
-          </h2>
-          {comments.map(c => (
-            <Commentary
-              key={c.id}
-              CommentEntity={c}
-              handleVoteComment={this.props.postDetailCommentVoteAction}
-              handleEditComment={this.props.postDetailCommentEditAction}
-              handleRemoveComment={this.props.postDetailCommentRemoveAction}
-            />
-          ))}
+        <div className="post-details-container">
+          <h1>{title}</h1>
+          <hr />
+          <div className="content-body">
+            <div className="content-body-left">
+              <Votacao post={PostEntity} />
+            </div>
+            <div className="content-body-right">
+              <p>{body}</p>
+              <small>
+                By: {author}, Date: {moment(timestamp).format("DD/MM/YY HH:mm")}
+              </small>
+            </div>
+          </div>
+          <hr />
+          <div id="comments">
+            <h2>
+              {comments.length} Answers
+              <IconButton
+                touch={true}
+                tooltip="Add new comment"
+                onClick={() =>
+                  this.props.postDetailOpenDialogCommentAction(true)}
+              >
+                <ActionNoteAdd color={blue500} />
+              </IconButton>
+            </h2>
+            {comments.map(c => (
+              <Commentary
+                key={c.id}
+                CommentEntity={c}
+                handleVoteComment={this.props.postDetailCommentVoteAction}
+                handleEditComment={this.props.postDetailCommentEditAction}
+                handleRemoveComment={this.props.postDetailCommentRemoveAction}
+              />
+            ))}
+          </div>
+          <PostFormView fab={false} />
+          <CommentFromView />
         </div>
-        <PostFormView fab={false} />
-        <CommentFromView />
       </div>
     );
   }

@@ -13,6 +13,7 @@ export const ListPosts = ({
       <ol className="postagem-list">
         {posts.map(post => (
           <Post
+            key={post.id}
             post={post}
             history={history}
             postEditAction={postEditAction}
