@@ -2,8 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { AppBar } from "material-ui";
 import { Toolbar } from "material-ui/Toolbar";
-import { Categories } from "./Categories";
-import Sort from "../components/Sort";
+import { Categories, Sort } from "../components";
 
 export const Top = ({
   history,
@@ -25,14 +24,13 @@ export const Top = ({
     {useToobar && (
       <Toolbar>
         <Sort sortSelected={sortSelected} handleChangeSort={handleChangeSort} />
-          <Categories
-            history={history}
-            categories={categories}
-            categorySelected={categorySelected}
-            handleChange={handleChangeCategory}
-            showFirstElement={true}
-          />
-
+        <Categories
+          history={history}
+          categories={categories}
+          categorySelected={categorySelected}
+          handleChange={handleChangeCategory}
+          showFirstElement={true}
+        />
       </Toolbar>
     )}
   </div>
