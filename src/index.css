@@ -106,10 +106,6 @@ body, .app {
   bottom: 25px;
 }
 
-.post-item {
-  cursor: pointer;
-}
-
 .showing-postagens {
   text-align: center;
   margin: 20px 0;
@@ -153,6 +149,7 @@ body, .app {
 }
 
 .postagem-details {
+  cursor: pointer;
   border-left: 1px solid #d5d8df;
   border-right: 1px solid #d5d8df;
   padding-left: 20px;

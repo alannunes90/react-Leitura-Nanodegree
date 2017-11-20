@@ -13,13 +13,11 @@ export const ListPosts = ({
     <div className="list-postagens">
       <ol className="postagem-list">
         {posts.map(post => (
-          <div className="post-item"
-            onClick={() => history.push(`/${post.category}/${post.id}`)}
-            key={post.id}
-          >
+          <div key={post.id}>
             <li key={post.id} className="postagem-list-item">
               <Votacao numVotos={post.voteScore} />
-              <div className="postagem-details">
+              <div className="postagem-details"
+            onClick={() => history.push(`/${post.category}/${post.id}`)}>
                 <p>{post.title}</p>
                 <p>{post.body}</p>
               </div>
