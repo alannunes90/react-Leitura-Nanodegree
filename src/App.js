@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { withRouter } from "react-router";
 import { connect } from "react-redux";
 import sortBy from "sort-by";
-import { Route } from "react-router-dom";
 import { ListPosts, Top } from "./components";
 import {
   rootChangeCategoryAction,
@@ -34,32 +33,24 @@ class App extends Component {
 
     return (
       <div>
-        <Route
-          exact
-          path="/"
-          render={() => (
-            <div>
-              <Top
-                title="Project of Reading"
-                history={history}
-                categories={categories}
-                categorySelected={categorySelected}
-                sortSelected={sortSelected}
-                handleChangeCategory={this.props.rootChangeCategoryAction}
-                handleChangeSort={this.props.rootChangeSortAction}
-              />
-              <ListPosts
-                posts={posts}
-                history={history}
-                postEditAction={this.props.postEditAction}
-                postRemoveAction={this.props.postRemoveAction}
-              />
-              <div className="add-postagem">
-                <PostFormView />
-              </div>
-            </div>
-          )}
+        <Top
+          title="Project of Reading"
+          history={history}
+          categories={categories}
+          categorySelected={categorySelected}
+          sortSelected={sortSelected}
+          handleChangeCategory={this.props.rootChangeCategoryAction}
+          handleChangeSort={this.props.rootChangeSortAction}
         />
+        <ListPosts
+          posts={posts}
+          history={history}
+          postEditAction={this.props.postEditAction}
+          postRemoveAction={this.props.postRemoveAction}
+        />
+        <div className="add-postagem">
+          <PostFormView />
+        </div>
       </div>
     );
   }

@@ -87,6 +87,7 @@ class PostDetailFormView extends Component {
           </ToolbarGroup>
         </Toolbar>
         <div className="post-details-container">
+        <div className="post-details">
           <h1>{title}</h1>
           <hr />
           <div className="content-body">
@@ -126,6 +127,7 @@ class PostDetailFormView extends Component {
           <PostFormView fab={false} />
           <CommentFromView />
         </div>
+      </div>
       </div>
     );
   }
