@@ -1,13 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Votacao from "./Votacao";
+import Post from "./Votacao";
 
 export const ListPosts = ({
   posts,
   history,
-  handleVotePost,
-  handleEditPost,
-  handleDeletePost
+  postEditAction,
+  postRemoveAction
 }) => {
   return (
     <div className="list-postagens">
@@ -15,23 +15,26 @@ export const ListPosts = ({
         {posts.map(post => (
           <div key={post.id}>
             <li key={post.id} className="postagem-list-item">
-              <Votacao numVotos={post.voteScore} />
-              <div className="postagem-details"
-            onClick={() => history.push(`/${post.category}/${post.id}`)}>
+              <Votacao post={post} />
+              <div
+                className="postagem-details"
+                onClick={() => history.push(`/${post.category}/${post.id}`)}
+              >
                 <p>{post.title}</p>
                 <p>{post.body}</p>
               </div>
               <div className="postagem-left">
                 <span
-                  onClick={() => handleEditPost(post)}
+                  
+                  onClick={() => postEditAction(post, history)}
                   className="postagem-left-editar"
-                  title="Editar postagem!"
+                  title="Edit post"
                 />
                 <br />
                 <span
-                  onClick={() => handleDeletePost(post.id)}
+                  onClick={() => postRemoveAction(post.id)}
                   className="postagem-left-excluir"
-                  title="Excluir a postagem!"
+                  title="Delete post"
                 />
               </div>
             </li>

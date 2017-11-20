@@ -20,9 +20,6 @@ import FloatingActionButton from "material-ui/FloatingActionButton";
 import ContentAdd from "material-ui/svg-icons/content/add";
 
 class App extends Component {
-  state = {
-    postagens: []
-  };
 
   componentDidMount() {
     this.props.rootListCategoriesAction();
@@ -59,9 +56,8 @@ class App extends Component {
               <ListPosts
                 posts={posts}
                 history={history}
-                handleVotePost={this.props.postVoteAction}
-                handleEditPost={this.props.postEditAction}
-                handleDeletePost={this.props.postRemoveAction}
+                postEditAction={this.props.postEditAction}
+                postRemoveAction={this.props.postRemoveAction}
               />
             </div>
           )}

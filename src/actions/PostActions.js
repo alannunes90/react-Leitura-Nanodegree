@@ -82,11 +82,14 @@ export const postFormCancelAction = () => {
   };
 };
 
-export const postEditAction = PostEntity => {
+export const postEditAction = (PostEntity, history) => {
   return dispatch => {
     dispatch(rootListCategoriesAction());
     dispatch({ type: POST_LOAD_DATA, payload: PostEntity });
     dispatch({ type: ROOT_DIALOG_POST_FORM, payload: true });
+    if (history) {
+      history.push(`/${PostEntity.category}/${PostEntity.id}`);
+    }
   };
 };
 

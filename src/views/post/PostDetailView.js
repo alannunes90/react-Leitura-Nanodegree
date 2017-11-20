@@ -74,13 +74,13 @@ class PostDetailFormView extends Component {
             <small>By: {author}, Date: {moment(timestamp).format("DD/MM/YY HH:mm")}</small><br />
             <IconButton
                 touch={true}
-                tooltip="Vote UP"
+                tooltip="This question shows research effort; it is useful and clear"
                 onClick={() => this.props.postVoteAction(PostEntity.id, "upVote")}>
                 <ActionThumbUp color={green500} />
             </IconButton>
             <IconButton
                 touch={true}
-                tooltip="Vote DOWN"
+                tooltip="This question does not show any research effort; it is unclear or not useful"
                 onClick={() => this.props.postVoteAction(PostEntity.id, "downVote")}>
                 <ActionThumbDown color={red500} />
             </IconButton>

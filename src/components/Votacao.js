@@ -1,30 +1,41 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { withRouter } from "react-router";
 import PropTypes from "prop-types";
+import { postVoteAction } from "../actions/PostActions";
 
 class Votacao extends Component {
   static propTypes = {
-    numVotos: PropTypes.number.isRequired
+    post: PropTypes.object.isRequired
   };
 
   render() {
-    const { numVotos} = this.props;
+    const { post } = this.props;
 
     return (
       <div className="postagem-vote">
         <span
           className="vote-up-off"
-          title="Esta pergunta mostra esforço de pesquisa; é útil e clara"
+          title="This question shows research effort; it is useful and clear"
+          onClick={() => this.props.postVoteAction(post.id, "upVote")}
         />
         <br />
-        <span className="vote-count-post">{numVotos}</span>
+        <span className="vote-count-post">{post.voteScore}</span>
         <br />
         <span
           className="vote-down-off"
-          title="Esta pergunta não mostra nenhum esforço de pesquisa; ela não é clara ou não é útil"
+          title="This question does not show any research effort; it is unclear or not useful"
+          onClick={() => this.props.postVoteAction(post.id, "downVote")}
         />
       </div>
     );
   }
 }
 
-export default Votacao;
+const mapStateToProps = state => ({});
+
+export default withRouter(
+  connect(mapStateToProps, {
+    postVoteAction
+  })(Votacao)
+);
