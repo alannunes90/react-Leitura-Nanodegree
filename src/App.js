@@ -20,7 +20,6 @@ import FloatingActionButton from "material-ui/FloatingActionButton";
 import ContentAdd from "material-ui/svg-icons/content/add";
 
 class App extends Component {
-
   componentDidMount() {
     this.props.rootListCategoriesAction();
     this.props.rootChangeCategoryAction("all");
