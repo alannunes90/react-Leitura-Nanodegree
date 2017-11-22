@@ -14,10 +14,16 @@ import {
 } from "./ActionsTypes";
 import * as Api from "../utils/LeituraAPI";
 
-export const getPostDetailAction = id => {
+export const getPostDetailAction = (id, history) => {
   return dispatch => {
     Api.getPostsDetail(id).then(post => {
-      dispatch({ type: DETAIL_GET_POST, payload: post });
+      //dispatch({ type: DETAIL_GET_POST, payload: post });
+      if (Object.keys(post).length > 0 && post.error === undefined) {
+        dispatch({ type: DETAIL_GET_POST, payload: post });
+      } else {
+        alert("Sorry this post was not found.");
+        history.push("/");
+      }
     });
   };
 };
