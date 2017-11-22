@@ -5,7 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import registerServiceWorker from "./registerServiceWorker";
 import "./index.css";
-import RouterApp from "./router";
+import { RouterApp } from "./router";
 import { store } from "./store";
 
 ReactDOM.render(
