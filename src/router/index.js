@@ -8,7 +8,7 @@ export const RouterApp = ({ location }) => (
   <Switch>
     <Route exact path="/" component={App} />
     <Route exact path="/:category" component={App} />
-    <Route path="/:category/:postId" component={PostDetailView} />
+    <Route exact path="/:category/:postId" component={PostDetailView} />
     <Route render={() => <Error404 location={location} />} />
   </Switch>
 );
