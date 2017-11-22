@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { Votacao } from "../components";
 import { IconButton } from "material-ui";
@@ -8,21 +8,9 @@ import EditorInsertInvitation from "material-ui/svg-icons/editor/insert-invitati
 import moment from "moment";
 import { grey500 } from "material-ui/styles/colors";
 
-class Post extends Component {
-  static propTypes = {
-    post: PropTypes.object.isRequired
-  };
 
-  render() {
-    const {
-      post,
-      history,
-      postEditAction,
-      postRemoveAction,
-      postVoteAction
-    } = this.props;
-    return (
-      <div key={post.id}>
+export const Post = ({ post, history, postEditAction, postRemoveAction, postVoteAction }) => (
+  <div key={post.id}>
         <li key={post.id} className="postagem-list-item">
           <Votacao post={post} postVoteAction={postVoteAction} />
           <div
@@ -62,8 +50,13 @@ class Post extends Component {
           </div>
         </li>
       </div>
-    );
-  }
-}
+);
 
-export default Post;
+Post.defaultProps = {
+  post: {}
+};
+
+
+Post.PropTypes = {
+  post: PropTypes.object.isRequired
+}
