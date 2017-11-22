@@ -32,7 +32,6 @@ export const postChangeCategoryAction = category => {
 };
 
 export const postFormSaveAction = PostEntity => {
-  debugger;
   let fieldsErros = [];
   let newPost = { ...PostEntity };
   let insert = false;

@@ -30,7 +30,7 @@ class App extends Component {
       categorySelected,
       sortSelected
     } = this.props;
-
+console.dir(posts);
     return (
       <div>
         <Top

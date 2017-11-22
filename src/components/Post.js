@@ -23,7 +23,7 @@ export const Post = ({ post, history, postEditAction, postRemoveAction, postVote
                 <EditorInsertInvitation color={grey500} />
                 {moment(post.timestamp).format("DD/MM/YY HH:mm")}
                 , {post.author}
-                , Total comments: {post.totalComments}
+                , Total comments: {post.commentCount}
               </span>
               <br />
               {post.body.substring(0, 100)}
@@ -51,6 +51,7 @@ export const Post = ({ post, history, postEditAction, postRemoveAction, postVote
         </li>
       </div>
 );
+
 
 Post.defaultProps = {
   post: {}
