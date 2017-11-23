@@ -10,6 +10,12 @@ import {
 } from "../../actions/PostDetailActions";
 
 class CommentFormView extends Component {
+  componentWillMount() {
+    const storageNameLoginGoogle = window.localStorage.getItem('localStorageNameLoginGoogle') || '[]';
+    
+    this.props.CommentEntity.author = storageNameLoginGoogle.replace("\"", "").replace("\"", "");
+  }
+
   render() {
     let {
       PostEntity,
