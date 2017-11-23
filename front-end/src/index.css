@@ -110,6 +110,26 @@ body,
   bottom: 25px;
 }
 
+.login-google {
+  display: inline-block; 
+  background: rgb(209, 72, 54); 
+  color: rgb(255, 255, 255); 
+  width: 150px; 
+  padding-top: 10px; 
+  padding-bottom: 10px; 
+  border-radius: 2px; 
+  border: 1px solid transparent; 
+  font-size: 16px; 
+  font-weight: bold; 
+  font-family: Roboto; 
+  position: 'fixed'; 
+  right: '100px'; 
+  bottom: '25px'; 
+  position: fixed;
+  right: 100px;
+  bottom: 25px;
+}
+
 .showing-postagens {
   text-align: center;
   margin: 20px 0;

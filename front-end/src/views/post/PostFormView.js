@@ -16,8 +16,46 @@ import {
   postFormSaveAction,
   postFormCancelAction
 } from "../../actions/PostActions";
+import GoogleLogin from 'react-google-login';
 
 class PostFormView extends Component {
+  state = {
+    loginGoogle: false,
+    nameGoogle: ''
+  }
+
+  onResponseGoogleSuccess = (response) => {
+    this.setState({ loginGoogle: true, nameGoogle: response.profileObj.name })
+    this.props.PostEntity.author = response.profileObj.name;
+
+    this.updateLocalStorage();
+  }
+
+  onResponseGoogleFailure = (response) => {
+    this.setState({ loginGoogle: false });
+    this.updateLocalStorage();
+  }
+
+  componentWillMount() {
+    const storageLoginGoogle = window.localStorage.getItem('localStorageLoginGoogle') || false;
+    const storageNameLoginGoogle = window.localStorage.getItem('localStorageNameLoginGoogle') || '[]';
+    
+    this.setState({
+      loginGoogle: JSON.parse(storageLoginGoogle),
+      nameGoogle: JSON.parse(storageNameLoginGoogle)
+    });
+
+    this.props.PostEntity.author = storageNameLoginGoogle.replace("\"", "").replace("\"", "");
+  }
+
+  /**
+   * @description Atualiza local storage (localStorageLoginGoogle)
+  */
+  updateLocalStorage() {
+    window.localStorage.setItem('localStorageLoginGoogle', JSON.stringify(this.state.loginGoogle));
+    window.localStorage.setItem('localStorageNameLoginGoogle', JSON.stringify(this.state.nameGoogle));
+  }
+
   render() {
     let { PostEntity, fieldsErros, openDialogState, fab } = this.props;
     const actions = [
@@ -36,9 +74,18 @@ class PostFormView extends Component {
 
     return (
       <div>
+        {!this.state.loginGoogle && (
+          <GoogleLogin
+            className="login-google"
+            clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
+            buttonText="Login with Google"
+            onSuccess={this.onResponseGoogleSuccess}
+            onFailure={this.onResponseGoogleFailure}
+          />
+        )}
         {fab && (
-          <FloatingActionButton
-            onClick={() => this.props.rootOpenDialogAction(true)}
+          <FloatingActionButton className="add-postagem"
+            onClick={() => this.props.rootOpenDialogAction(true, this.state.loginGoogle)}
           >
             <ContentAdd />
           </FloatingActionButton>

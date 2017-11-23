@@ -18,6 +18,7 @@ import {
 import PostFormView from "./views/post/PostFormView";
 
 class App extends Component {
+
   componentDidMount() {
     this.props.rootListCategoriesAction();
     this.props.rootChangeCategoryAction("all");
@@ -30,7 +31,6 @@ class App extends Component {
       categorySelected,
       sortSelected
     } = this.props;
-console.dir(posts);
     return (
       <div>
         <Top
@@ -49,9 +49,7 @@ console.dir(posts);
           postRemoveAction={this.props.postRemoveAction}
           postVoteAction={this.props.postVoteAction}
         />
-        <div className="add-postagem">
-          <PostFormView />
-        </div>
+        <PostFormView />
       </div>
     );
   }
@@ -62,13 +60,13 @@ const mapStateToProps = state => ({
   sortSelected: state.RootReducer.sortSelected,
   categories: state.RootReducer.categories,
   posts:
-    state.RootReducer.categorySelected !== "all"
-      ? state.RootReducer.posts.filter(
-          p => !p.deleted && p.category === state.RootReducer.categorySelected
-        )
-      : state.RootReducer.posts
-          .filter(p => !p.deleted)
-          .sort(sortBy(state.RootReducer.sortSelected)),
+  state.RootReducer.categorySelected !== "all"
+    ? state.RootReducer.posts.filter(
+      p => !p.deleted && p.category === state.RootReducer.categorySelected
+    )
+    : state.RootReducer.posts
+      .filter(p => !p.deleted)
+      .sort(sortBy(state.RootReducer.sortSelected)),
   openDialogState: state.RootReducer.openDialogState
 });
 

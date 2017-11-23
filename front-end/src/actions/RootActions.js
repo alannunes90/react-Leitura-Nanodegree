@@ -46,7 +46,11 @@ export const rootListPostsAction = categoryId => {
   };
 };
 
-export const rootOpenDialogAction = openDialogState => {
+export const rootOpenDialogAction = (openDialogState, isLoggedGoogle) => {
+  if (!isLoggedGoogle) {
+    alert('You must be logged in to post a new post');
+    openDialogState = false;
+  }
   return {
     type: ROOT_DIALOG_POST_FORM,
     payload: openDialogState

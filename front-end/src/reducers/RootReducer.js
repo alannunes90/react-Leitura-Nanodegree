@@ -14,7 +14,8 @@ const INITIAL_STATE = {
   sortSelected: "-voteScore",
   categories: [],
   posts: [],
-  openDialogState: false
+  openDialogState: false,
+  loginGoogle: false
 };
 
 export default (state = INITIAL_STATE, action) => {

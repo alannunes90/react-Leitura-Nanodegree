@@ -94,7 +94,7 @@ export const postEditAction = (PostEntity, history) => {
 
 export const postRemoveAction = (post_id, history) => {
   return dispatch => {
-    if (window.confirm("Você confirma a remoção da postagem?")) {
+    if (window.confirm("Remove post?")) {
       Api.removePost(post_id).then(post => {
         dispatch({ type: POST_REMOVE, payload: post });
         // Adicionar rotina para "remover" os comentários.
